@@ -53,8 +53,16 @@ Sandbag Lunges、Wall Ball 專篇，以及 damper／drag factor 與比賽策略�
 <h3>本讀本的產製方式</h3>
 
 <p>賽制部分由主 session（Claude Code）直接抓取官網逐字內容並核對媒體稿差異；
-HYROX 八站技術與 compromised running 章節由同機的 Codex（gpt-5.6-sol）平行查證英文來源後撰寫，
-再由主 session 整合、按 HARCO 站量換算、並修正兩處距離誤植。
-配速換算模型與八週計畫由主 session 撰寫。原始研究筆記保留在本 repo 的 <code>research/</code> 資料夾。</p>
+HYROX 八站技術、雪橇兩站專章與 compromised running 章節，由同機的 Codex（gpt-5.6-sol）
+平行查證英文來源後撰寫，再由主 session 整合、按 HARCO 站量換算、並修正兩處距離誤植。
+配速換算模型與八週計畫由主 session 撰寫。</p>
+
+<p>完稿後由 Codex 做獨立審稿，提出 10 項問題，其中影響判讀的幾項已改：
+分位數相加不具統計意義（時間表改為區間呈現）、換算係數過度確定（加列不確定性）、
+多處把 HYROX 規則寫成 HARCO 規則（逐處標注）、訓練負荷對未知基礎者過重（全面下修並改用 RPE）。
+修改內容與理由記在 <code>research/pacing-model.md</code> 的修訂說明。</p>
+
+<p>本讀本以<strong>男子組 SOLO</strong> 為對象撰寫。
+原始研究筆記（含完整男女規格）保留在本 repo 的 <code>research/</code> 資料夾。</p>
 
 <p class="muted">最後更新：2026-08-20</p>
