@@ -15,7 +15,7 @@ GitHub 的 markdown 渲染看不到排版，請直接下載 `index.html` 開啟�
 | 4. 其他六站 | SkiErg、Burpee、Row、Farmer、Lunge、Wall Ball |
 | 5. 跑步與轉換區 | 八段配速計畫、RoxZone 策略 |
 | 6. 八週訓練計畫 | 2026-08-24 → 2026-10-18 |
-| 7. 賽前一週與比賽日 | 裝備、時間表、配速卡 |
+| 7. 賽前一週與比賽日 | **選鞋**、裝備、時間表、配速卡 |
 | 8. 來源與待確認 | 全部出處與賽前必須核對的七件事 |
 
 ## 重要提醒
@@ -26,6 +26,8 @@ GitHub 的 markdown 渲染看不到排版，請直接下載 `index.html` 開啟�
 - 讀本中的時間是**由 Hyrox 公開資料推估的區間**（約 37–41 分），不是 HARCO 官方預測，也不是統計上的中位完賽時間。HARCO 是首屆賽事，無歷史成績。
 - 第 2、3、4 章中標注「HYROX 標準」的規則敘述**不是 HARCO 已公告的規則**，賽前技術說明出來後必須重新核對。
 - 官網 FAQ 載明「詳細各關卡規格將於賽前說明文件公告」，公告後需重新核對（見第 8 章待確認清單）。
+- **選鞋不能照抄網路上的 HYROX 推薦**——那些推薦建立在 8 km 跑量上，HARCO 只有 3.2 km 但負重完全相同，
+  抓地與站點穩定的權重更高、緩衝與碳板的權重更低。理由與數據見第 7 章與 `research/shoe-selection.md`。
 
 ## 目錄結構
 
@@ -38,6 +40,7 @@ research/           研究筆記（含出處），讀本的憑據
   training-plan.md            八週計畫草稿
   codex-hyrox-stations.md     Hyrox 八站技術（Codex 產出）
   codex-sled-deep-dive.md     雪橇兩站專題（Codex 產出）
+  shoe-selection.md           選鞋實驗室數據比較與決策（2026-08-31）
 build.sh            重新產生 index.html
 ```
 
