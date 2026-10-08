@@ -3,9 +3,14 @@
 <h3>賽制來源</h3>
 
 <ul>
+<li><strong>2026 HARCO 官方大會手冊（發佈用）</strong>
+——主辦單位 <strong>2026-10-08</strong> 發佈的 PDF（35 頁，本 repo 不附原檔）。
+組別規格、時段、報到與晶片、場地配置與動線、競賽通則、八站動作與判罰、成績與申訴。
+<strong>賽制、動作標準與判罰以此為準</strong>；文中「手冊 p.XX」為手冊印刷頁碼。
+重點整理在 <code>research/harco-handbook-2026.md</code>。</li>
 <li><a href="https://www.harco.tw/" target="_blank">HARCO 官網 harco.tw</a>
-——八站規格、跑步距離、組別規則、票價、FAQ。本讀本所有賽制數字以此為準，
-於 <strong>2026-08-20</strong> 以瀏覽器抓取頁面逐字內容。</li>
+——八站規格、跑步距離、組別規則、票價、FAQ。
+於 <strong>2026-08-20</strong> 以瀏覽器抓取頁面逐字內容；規格與大會手冊一致。</li>
 <li><a href="https://bao-ming.com/eb/content/7109" target="_blank">伊貝特報名網 報名頁</a>
 ——報名與時程（頁面有 Cloudflare 人機驗證，未直接取得內容）。</li>
 <li><a href="https://www.don1don.com/archives/232838/" target="_blank">動一動 don1don 賽事報導</a>
@@ -20,7 +25,7 @@
 <li><a href="https://hyroxdatalab.com/articles/roxzone-efficiency-analysis" target="_blank">HyroxDataLab：RoxZone 效率分析</a>
 ——825 人樣本的轉換區時間與 3 秒規則。</li>
 <li><a href="https://maintain.hyrox.com/rulebooks/HYROX_RulebookSingles_EN.pdf" target="_blank">HYROX 2026–27 Singles Rulebook</a>
-——各站判罰與動作標準。<strong>HARCO 不適用此規則書</strong>，僅作為動作標準參考。</li>
+——HYROX 的判罰與動作標準。<strong>HARCO 不適用此規則書</strong>，HARCO 的規則以大會手冊為準。</li>
 <li><a href="https://roxlyfe.com/" target="_blank">Rox Lyfe 各站技術指南</a>
 ——SkiErg、Sled Push、Sled Pull、Burpee Broad Jump、Rowing、Farmers Carry、
 Sandbag Lunges、Wall Ball 專篇，以及 damper／drag factor 與比賽策略。</li>
@@ -40,23 +45,34 @@ Sandbag Lunges、Wall Ball 專篇，以及 damper／drag factor 與比賽策略�
 原本的候選比較（RunRepeat 實驗室數據、碳板配速文獻、PUMA／Nike／Mizuno 通路資訊）
 與完整來源清單已歸檔到 <code>research/archive/shoe-selection.md</code>，不再列於此。</p>
 
-<h3>待確認清單</h3>
+<h3>待確認清單：大會手冊核對結果</h3>
+
+<p>原本列了八項「賽前說明公告後要核對」的事。2026-10-08 大會手冊發佈後逐項核對如下：</p>
+
+<table>
+<thead><tr><th>#</th><th>項目</th><th>手冊答案</th><th>狀態</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>弓箭步器材</td><td><strong>20 kg 沙包</strong>（Sandbag Lunges）；全程自己支撐，扛肩或抱胸沒規定（p.18）</td><td>已確定</td></tr>
+<tr><td>2</td><td>雪橇跑道形式</td><td>推、拉都是<strong>折返制</strong>，整台過底線才可折返；<strong>每趟長度與趟數沒寫</strong>（p.13–p.14）</td><td>一半</td></tr>
+<tr><td>3</td><td>判罰方式</td><td>警告 → 15 秒 → 每次再加 15 秒；器材歸位 30 秒；Wall Ball 直接 No Rep；沒做完離站 DQ（p.12–p.20）</td><td>已確定</td></tr>
+<tr><td>4</td><td>Wall Ball 目標高度與蹲深</td><td>男子 <strong>3.00 m</strong>；<strong>髖部低於膝蓋</strong>（p.19）</td><td>已確定</td></tr>
+<tr><td>5</td><td>手套、護膝、舉重腰帶</td><td><strong>都允許</strong>（另含護腕、水袋背包）；帶上賽道就要全程配戴，不能中途交接（p.11）</td><td>已確定</td></tr>
+<tr><td>6</td><td>兩天組別分配</td><td>10/17 SOLO 上午；10/18 SOLO 也在上午時段，但男子單人晶片最晚 15:20；
+<strong>個人出發時間看梯次通知</strong>（p.02、p.08）</td><td>已確定（個人梯次待通知）</td></tr>
+<tr><td>7</td><td>轉換區動線與水站</td><td>配置圖已公告：IN／OUT 在轉換區左側、補水站在轉換區、站點排列與比賽順序不同（p.09–p.10）；
+<strong>實際距離沒標</strong></td><td>一半</td></tr>
+<tr><td>8</td><td>雪橇跑道與場地地面材質</td><td><strong>手冊沒提</strong></td><td>未回答</td></tr>
+</tbody>
+</table>
 
 <div class="warn">
-以下項目在賽前說明文件公告後<strong>必須重新核對</strong>，並回頭修正本讀本：
+<strong>仍待現場確認的事：</strong>
 <ol>
-<li><strong>弓箭步的器材</strong>——sandbag 扛肩？啞鈴？壺鈴？影響最後兩週的訓練內容。</li>
-<li><strong>雪橇跑道形式</strong>——25 m 是直線一趟，還是 12.5 m 折返兩趟？
-折返會多一次靜摩擦起步，時間推估要調整。</li>
-<li><strong>判罰方式</strong>——no-rep 怎麼算、漏段怎麼罰、是否有加時罰則。</li>
-<li><strong>Wall Ball 目標高度</strong>與蹲深標準。</li>
-<li><strong>是否允許手套、護膝、舉重腰帶。</strong></li>
-<li><strong>10/17 與 10/18 兩天的組別分配</strong>——確認自己是哪一天哪一時段。</li>
-<li><strong>轉換區動線與水站位置</strong>——只能到現場確認。</li>
-<li><strong>雪橇跑道與場地的地面材質</strong>——人工草皮？PVC 運動地板？木地板？
-<strong>若說明文件未載材質，直接向主辦確認。</strong>
-公告後有機會就穿 Dropset Pro 在相近表面試雪橇起步、卡住重啟與（若為折返制）轉向。
-鞋已定案，這一項只影響當天的步幅與手位，不再影響選鞋。</li>
+<li><strong>雪橇每趟長度與趟數</strong>——推估假設 2 × 12.5 m；趟數更多就多幾次起步，時間往上調。</li>
+<li><strong>地面材質</strong>——鞋已定案，這一項只影響當天的步幅與手位。10/17 去報到時看一眼最省事。</li>
+<li><strong>自己的出發梯次</strong>——收到個人梯次通知後，把第 7 章時間表往回推。</li>
+<li><strong>沙包怎麼拿</strong>——手冊沒規定，看前面梯次或問裁判；預設扛肩。</li>
+<li><strong>熱身區有沒有雪橇</strong>——沒有就照第 3 章的替代熱身，不測。</li>
 </ol>
 </div>
 
@@ -81,4 +97,11 @@ HYROX 八站技術、雪橇兩站專章與 compromised running 章節，由同�
 <strong>2026-09-14 使用者定案 adidas Dropset Pro</strong>，該節精簡為定案與磨合安排，
 原始研究、審稿過程與四項門檻歸檔於 <code>research/archive/shoe-selection.md</code>。</p>
 
-<p class="muted">最後更新：2026-09-14</p>
+<p><strong>2026-10-08</strong> 主辦單位發佈官方大會手冊後，由主 session 逐頁核對並併入全書：
+第 1 章補規格器材欄、時段表與判罰總表；第 2–4 章原本標「HYROX 標準」的規則敘述，改為手冊條文與判罰；
+第 5 章加入裁判確認離站與場地動線；第 7 章改寫報到、晶片、裝備與完賽流程；本章待確認清單改為核對結果。
+手冊 PDF 的數字字型沒有文字對應，所有數字都是對照頁面影像逐一判讀。
+併入內容另經 Codex 對照原 PDF 獨立校對兩輪：第一輪提出 6 項修正（多為把推測寫得太肯定、或帶入 HYROX 條文），
+全數採納後第二輪通過。校對範圍限手冊相關內容，既有的 HYROX 配速估算與訓練研究未重新審查。</p>
+
+<p class="muted">最後更新：2026-10-08</p>
