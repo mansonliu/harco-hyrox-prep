@@ -1,7 +1,7 @@
 {
-  "title": "HARCO 2026 備賽讀本",
-  "subtitle": "八項混合運動挑戰賽 · 技術與策略分析 · 目標 2026-10-18 穩健完賽",
+  "title": "HYROX Taipei 2027 備賽讀本",
+  "subtitle": "男子公開組 · 以 HARCO 2026 實測成績為基準 · 2027-03-13 南港展覽館",
   "output": "index.html",
-  "footer": "個人備賽用途整理。賽制、動作標準與判罰以 2026-10-08 發佈之 HARCO 官方大會手冊為準（規格與 harco.tw 官網一致），技術與秒數資料來自公開 HYROX 來源，非 HARCO 官方成績預測。",
+  "footer": "個人備賽用途整理。HYROX 賽制、動作標準與判罰以 HYROX 26/27 Singles Rulebook 與 HYROX Taipei 官方公告為準；HARCO 成績取自大會計時公司成績頁（僅供參考），心率取自個人手錶紀錄。時間推估為量級參考，不是預測。",
   "source_label": "來源"
 }

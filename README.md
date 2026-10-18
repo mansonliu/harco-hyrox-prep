@@ -1,48 +1,50 @@
-# HARCO 2026 備賽讀本
+# HYROX Taipei 2027 備賽讀本（原 HARCO 2026 備賽讀本）
 
-2026 HARCO 八項混合運動挑戰賽（2026.10.17–10.18，台北世貿一館）的個人備賽整理。
+個人混合體能賽事備賽整理。2026-10-18 完成 HARCO 八項混合運動挑戰賽（官方 41:58.5），
+下一場是 **2027-03-13（六）HYROX Taipei 男子公開組**（南港展覽館一館）。
+讀本已從 HARCO 版改寫為 HYROX 版，HARCO 的實際成績與手錶紀錄當作訓練基準。
 
-**成品：`index.html`** — 左側頁籤式讀本，響應式、暗色模式相容。用瀏覽器開啟即可。
-GitHub 的 markdown 渲染看不到排版，請直接下載 `index.html` 開啟。
+**成品：`index.html`** — 左側頁籤式讀本，響應式、暗色模式相容。用瀏覽器開啟即可，
+或看 GitHub Pages：https://mansonliu.github.io/harco-hyrox-prep/
 
 ## 內容
 
 | 章節 | 內容 |
 |---|---|
-| 1. 賽制與目標 | 大會手冊規格與時段、判罰總表、HARCO ≒ 半場 Hyrox 的對照、推估目標時間 |
-| 2. 推雪橇 Sled Push | 技術、卡住的破解、無器材替代訓練 |
-| 3. 拉雪橇 Sled Pull | 三種拉法比較、繩索管理、選擇依據 |
-| 4. 其他六站 | SkiErg、Burpee、Row、Farmer、Lunge、Wall Ball |
-| 5. 跑步與轉換區 | 八段配速計畫、RoxZone 策略、場地配置與動線 |
-| 6. 八週訓練計畫 | 2026-08-24 → 2026-10-18 |
-| 7. 賽前一週與比賽日 | 報到與晶片、鞋（已定案 adidas Dropset Pro）、裝備、時間表、完賽與申訴 |
-| 8. 來源與待確認 | 全部出處、大會手冊核對結果、仍待現場確認的事 |
+| 1. HYROX 賽制與目標 | HYROX Taipei 賽事資訊、Men Open 規格、與 HARCO 不同的規則、判罰總表、以 HARCO 實測放大的目標時間 |
+| 2. HARCO 2026 成績檢討 | 官方分段與排名、Garmin 圈數對齊、各站動作時間與站內走動、心率時間軸、帶到 HYROX 的五個結論 |
+| 3. 推雪橇 Sled Push | 152 kg × 4 × 12.5 m；技術、卡住的破解、無器材替代訓練 |
+| 4. 拉雪橇 Sled Pull | 103 kg × 4 × 12.5 m；三種拉法、繩索管理、1 km 恢復跑 |
+| 5. 其他六站 | SkiErg、Burpee、Row、Farmers、Sandbag Lunges、Wall Ball：規則、HARCO 實測、HYROX 推估、分組策略 |
+| 6. 跑步與轉換區 | 8 × 1 km 心率配速、跑圈自己數、RoxZone 流程 |
+| 7. 訓練計畫 | 21 週（2026-10-19 → 2027-03-13），W9／W13／W18 三次測驗，元旦、春節、和平紀念日安排 |
+| 8. 比賽週與比賽日 | 報到、裝備（§10 允許清單）、補給、以出發時間往回推的時間表、配速卡 |
+| 9. 來源與待確認 | 規則書與賽事頁、HARCO 成績來源、技術資料、HYROX Taipei 待公布事項 |
 
 ## 重要提醒
 
-- **跑步是每站間 400 m（全程 3.2 km）**，不是媒體稿寫的 800 m。以官網為準。
-- **重量與 Hyrox 完全相同**，只有距離與次數減半。肌力門檻沒有變低。
-- 讀本以**男子組 SOLO** 為對象。
-- 讀本中的時間是**由 Hyrox 公開資料推估的區間**（約 37–41 分），不是 HARCO 官方預測，也不是統計上的中位完賽時間。HARCO 是首屆賽事，無歷史成績。
-- **2026-10-08 官方大會手冊發佈後，賽制、動作標準與判罰一律以手冊為準**（本 repo 不附原檔），
-  重點整理在 `research/harco-handbook-2026.md`。第 2、3、4 章的規則敘述已改為手冊條文。
-- 手冊沒寫的仍待現場確認：雪橇每趟長度與趟數、地面材質、個人出發梯次（見第 8 章）。
-- **鞋已定案：adidas Dropset Pro**（2026-09-14）。定案前的候選比較與四項門檻討論
-  歸檔在 `research/archive/shoe-selection.md`，不再更新；第 7 章只留磨合安排。
+- **規格與判罰以 HYROX 26/27 Singles Rulebook 為準**（2026-10-18 核對），重點在 `research/hyrox-rulebook-2627.md`。
+- **Men Open 器材是灰色**：壺鈴 2 × 24 kg、沙包 20 kg、藥球 6 kg；雪橇 152／103 kg 含雪橇，各 4 × 12.5 m。
+- HYROX 與 HARCO 的關鍵差異：**沙包要扛雙肩**、**任何一站沒做完 DQ**、**跑圈自己數**、止滑粉只能用大會提供的。
+- 目標時間「約 1:32–1:42」是用 HARCO 動作時間乘假設係數推來的量級，不是預測；以 W9、W13、W18 測驗修正。
+- HYROX Taipei 的跑圈數、場地圖、報到時間仍是 TBC；個人出發時間賽前約 3 天公布。
+- 鞋沿用 HARCO 穿的 adidas Dropset Pro（2026-09-14 定案）；W18 全程模擬再確認。
+- 公開 repo：不寫姓名、選手編號；HARCO 原始成績 PDF 與 TCX 不進 repo。
 
 ## 目錄結構
 
 ```
 index.html          成品讀本
-_notes/             讀本原始碼（body.html 分段 + meta.json），改內容改這裡
+_notes/             讀本原始碼（NN-*.html 分段 + meta.json），改內容改這裡
 research/           研究筆記（含出處），讀本的憑據
-  harco-handbook-2026.md      官方大會手冊重點（規格、流程、八站規則與判罰）
-  harco-official-spec.md      官網逐字規格（2026-08-20）
-  pacing-model.md             配速換算模型與推算過程
-  training-plan.md            八週計畫草稿
-  codex-hyrox-stations.md     Hyrox 八站技術（Codex 產出）
+  hyrox-rulebook-2627.md      HYROX 26/27 單人規則書重點＋HYROX Taipei 賽事資訊
+  harco-2026-results.md       HARCO 官方分段、Garmin 圈數、對齊方法、心率、HYROX 推估
+  harco-handbook-2026.md      HARCO 官方大會手冊重點（對照 HARCO 成績時查規則用）
+  harco-official-spec.md      HARCO 官網逐字規格（2026-08-20）
+  codex-hyrox-stations.md     HYROX 八站技術（Codex 產出）
   codex-sled-deep-dive.md     雪橇兩站專題（Codex 產出）
-  archive/shoe-selection.md   選鞋候選比較與決策門檻（已歸檔，鞋已定案 adidas Dropset Pro）
+  archive/                    已結束的 HARCO 備賽資料（配速模型、八週計畫、選鞋）
+scripts/            HARCO 圈數對齊與心率圖產生腳本（輸入 TCX，不在 repo）
 build.sh            重新產生 index.html
 ```
 
