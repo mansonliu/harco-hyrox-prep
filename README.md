@@ -7,6 +7,8 @@
 **成品：`index.html`** — 左側頁籤式讀本，響應式、暗色模式相容。用瀏覽器開啟即可，
 或看 GitHub Pages：https://mansonliu.github.io/harco-hyrox-prep/
 
+**第二頁：`running/index.html`** — 跑步訓練頁（Garmin 數據現況、三個瓶頸、強度分級、到 HYROX 的跑步安排、HYROX 之後的半馬與全馬、每月月檢紀錄）：https://mansonliu.github.io/harco-hyrox-prep/running/
+
 ## 內容
 
 | 章節 | 內容 |
@@ -17,7 +19,7 @@
 | 4. 雪橇兩站 | 推 152 kg、拉 103 kg，各 4 × 12.5 m；精簡版技術、卡住重啟、繩索管理、替代訓練 |
 | 5. 其他五站 | SkiErg、Burpee、Row、Farmers、Sandbag Lunges：規則、HARCO 實測、HYROX 推估 |
 | 6. 跑步與轉換區 | 8 × 1 km 心率配速、跑圈自己數、RoxZone 流程 |
-| 7. 訓練計畫 | 21 週（2026-10-19 → 2027-03-13），以每週六中午 1 小時教練課為核心＋自主訓練；W9／W13／W18 三次測驗；連假安排；Garmin 月檢（訓練基準與五個追蹤指標） |
+| 7. 訓練計畫 | 21 週（2026-10-19 → 2027-03-13），以每週六中午 1 小時教練課為核心＋自主訓練；W9／W13／W18 三次測驗；連假安排；跑步訓練與月檢移到 running/ 頁 |
 | 8. 比賽週與比賽日 | 報到、裝備（§10 允許清單）、補給、以出發時間往回推的時間表、配速卡 |
 | 9. 來源與待確認 | 規則書與賽事頁、HARCO 成績來源、技術資料、HYROX Taipei 待公布事項 |
 
@@ -37,6 +39,7 @@
 ```
 index.html          成品讀本
 _notes/             讀本原始碼（NN-*.html 分段 + meta.json），改內容改這裡
+running/            跑步訓練頁（同樣的 _notes/ 結構，build.sh 一起產出 running/index.html）
 research/           研究筆記（含出處），讀本的憑據
   hyrox-rulebook-2627.md      HYROX 26/27 單人規則書重點＋HYROX Taipei 賽事資訊
   harco-2026-results.md       HARCO 官方分段、Garmin 圈數、對齊方法、心率、HYROX 推估

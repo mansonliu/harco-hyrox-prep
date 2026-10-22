@@ -1,0 +1,7 @@
+{
+  "title": "跑步訓練：從 Garmin 數據到 HYROX、半馬與全馬",
+  "subtitle": "以 Garmin Connect 一年紀錄為基準 · 2026-10-22 起每月更新",
+  "output": "index.html",
+  "footer": "個人訓練用途整理。數據取自 Garmin Connect Personal API 與手錶讀數；心率區間、配速與時間推估都是起點，以每月月檢與實際測驗修正。HYROX 備賽讀本見上一層頁面。",
+  "source_label": "來源"
+}

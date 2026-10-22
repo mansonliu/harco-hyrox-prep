@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>跑步訓練：從 Garmin 數據到 HYROX、半馬與全馬</title>
+<style>
+:root{
+  --bg:#ffffff; --fg:#1a1a1a; --muted:#6b7280; --line:#e3e6ea;
+  --accent:#0b5cad; --accent-soft:#eaf2fb; --card:#f7f9fb;
+  --warn-bg:#fff7e6; --warn-line:#e0a800; --key-bg:#eef6ee; --key-line:#3a7d44;
+  --code-bg:#f0f2f5; --tag:#0b5cad;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#16181c; --fg:#e6e8ea; --muted:#9aa3ad; --line:#2c313a;
+    --accent:#5aa9f0; --accent-soft:#1b2533; --card:#1d2026;
+    --warn-bg:#2a2410; --warn-line:#b8860b; --key-bg:#15241a; --key-line:#4a9d5a;
+    --code-bg:#22262d; --tag:#7cc0ff;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei","Noto Sans TC",Helvetica,Arial,sans-serif;
+  line-height:1.75;font-size:17px}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 20px 96px}
+strong{font-weight:600}
+.layout{display:flex;gap:30px;align-items:flex-start}
+main{flex:1;min-width:0;max-width:840px}
+header.doc{border-bottom:2px solid var(--accent);padding-bottom:16px;margin-bottom:28px}
+header.doc h1{font-size:1.7rem;margin:0 0 6px;letter-spacing:-.01em}
+header.doc .sub{color:var(--muted);font-size:.95rem}
+h2{font-size:1.35rem;margin:2.4em 0 .7em;padding-top:.3em;border-top:1px solid var(--line)}
+h3{font-size:1.12rem;margin:1.8em 0 .5em;color:var(--accent)}
+h4{font-size:1rem;margin:1.3em 0 .4em}
+p{margin:.7em 0}
+a{color:var(--accent)}
+code{background:var(--code-bg);padding:.1em .4em;border-radius:4px;font-size:.88em;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+ul,ol{padding-left:1.4em}
+li{margin:.32em 0}
+.muted{color:var(--muted);font-size:.92rem}
+blockquote.src{margin:.5em 0;padding:.5em .9em;border:1px solid var(--line);
+  background:var(--card);color:var(--muted);font-size:.86rem;font-style:italic;border-radius:6px}
+blockquote.src .pmid{font-style:normal;color:var(--tag);font-size:.82rem;white-space:nowrap}
+.key{background:var(--key-bg);border:1px solid var(--key-line);padding:.7em 1em;margin:1em 0;border-radius:8px}
+.key::before{content:"重點";display:block;font-weight:600;font-size:.8rem;color:var(--key-line);margin-bottom:.3em;letter-spacing:.05em}
+.warn{background:var(--warn-bg);border:1px solid var(--warn-line);padding:.7em 1em;margin:1em 0;border-radius:8px}
+.warn::before{content:"注意";display:block;font-weight:600;font-size:.8rem;color:var(--warn-line);margin-bottom:.3em;letter-spacing:.05em}
+table{border-collapse:collapse;width:100%;margin:1.2em 0;font-size:.92rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--line);padding:.5em .7em;text-align:left;vertical-align:top}
+th{background:var(--accent-soft);font-weight:600}
+figure.fig{margin:1.2em 0;padding:0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+figure.fig img{width:100%;height:auto;display:block;background:#fff}
+figure.fig figcaption{padding:.55em .8em;font-size:.82rem;color:var(--muted);line-height:1.5}
+.figtag{display:inline-block;background:var(--accent-soft);color:var(--tag);font-family:monospace;font-size:.78rem;padding:.05em .4em;border-radius:4px;margin-right:.4em}
+.figgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin:1em 0}
+details.paperfigs{margin:1.4em 0;border:1px solid var(--line);border-radius:10px;padding:0 14px}
+details.paperfigs>summary{cursor:pointer;padding:.8em 0;font-weight:600;font-size:1.02rem}
+nav.toc{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1em 1.3em;margin:1.5em 0}
+.scope{background:var(--accent-soft);border:1px solid var(--line);border-radius:10px;padding:.9em 1.2em;font-size:.92rem;margin:1.2em 0}
+/* tabs — left sidebar */
+.tabbar{position:sticky;top:20px;flex:0 0 210px;width:210px;
+  display:flex;flex-direction:column;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;
+  scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.tab{cursor:pointer;border:1px solid transparent;text-align:left;
+  background:transparent;color:var(--muted);font:inherit;font-size:.9rem;line-height:1.35;
+  padding:.55em .8em;border-radius:8px;white-space:normal;transition:.12s}
+.tab:hover{color:var(--fg);background:var(--card)}
+.tab.active{background:var(--accent-soft);color:var(--accent);border-color:var(--line);font-weight:600}
+.tabpanel{display:none;animation:fade .18s ease}
+.tabpanel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.tabpanel>h2:first-child{border-top:none;margin-top:.2em}
+@media(max-width:760px){
+  .layout{flex-direction:column;gap:0}
+  .tabbar{position:sticky;top:0;z-index:20;flex-direction:row;width:auto;flex:none;
+    gap:6px;overflow-x:auto;max-height:none;background:var(--bg);
+    border-bottom:2px solid var(--accent);padding:8px 0;margin-bottom:8px}
+  .tab{flex:0 0 auto;white-space:nowrap;border:1px solid var(--line)}
+  .tab.active{border-color:var(--accent)}
+  main{max-width:none}
+}
+@media(max-width:600px){body{font-size:16px}.wrap{padding:20px 14px 72px}.figgrid{grid-template-columns:1fr}
+  .tab{font-size:.82rem;padding:.45em .65em}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="doc">
+<h1>跑步訓練：從 Garmin 數據到 HYROX、半馬與全馬</h1>
+<div class="sub">以 Garmin Connect 一年紀錄為基準 · 2026-10-22 起每月更新</div>
+</header>
+<div class="layout">
+<div class="tabbar" role="tablist">
+<button class="tab active" role="tab" data-target="status" id="tab-status">1. 現況：Garmin 看到的樣子</button>
+<button class="tab" role="tab" data-target="limits" id="tab-limits">2. 三個瓶頸</button>
+<button class="tab" role="tab" data-target="zones" id="tab-zones">3. 強度分級</button>
+<button class="tab" role="tab" data-target="tohyrox" id="tab-tohyrox">4. 到 HYROX（3/13）的跑步安排</button>
+<button class="tab" role="tab" data-target="after" id="tab-after">5. HYROX 之後：半馬與全馬</button>
+<button class="tab" role="tab" data-target="monthly" id="tab-monthly">6. 每月月檢</button>
+<button class="tab" role="tab" data-target="sources" id="tab-sources">7. 來源與限制</button>
+</div>
+<main>
+<section class="tabpanel active" id="status" role="tabpanel" aria-labelledby="tab-status">
+<h2 id="status">1. 現況：Garmin 看到的樣子</h2>
+
+<div class="scope">
+這一頁把跑步訓練相關的內容集中在一起：現在的底子、三個瓶頸、強度分級、到 HYROX 的跑步安排、HYROX 之後的半馬與全馬，以及每個月要看的五個數字。
+HYROX 站點技術、教練課與比賽日流程在 <a href="../">備賽讀本</a>；這一頁只管跑步與恢復。
+資料來源是 Garmin Connect Personal API（2026-10-22 擷取，活動紀錄自 2023-08 起 886 筆），完整表格在 <code>research/garmin-baseline-2026-10.md</code>。
+</div>
+
+<h3>一年的量</h3>
+
+<table>
+<thead><tr><th>項目</th><th>2025-10 → 2026-10</th></tr></thead>
+<tbody>
+<tr><td>跑步</td><td>每月 80–140 km、12–20 次；每週 3–4 次，多在週二、週四、週六；單次多在 5–8 km</td></tr>
+<tr><td>最長跑</td><td>18.6 km（2026-03-07，6:04/km，心率 153）；16 km 以上一年只有 4 次</td></tr>
+<tr><td>騎車</td><td>2026-05 以前每月 240–270 km，7 月起降到 70–140 km</td></tr>
+<tr><td>肌力與 HIIT</td><td>2026-08 才固定出現，之後每週 1–2 次、每次 30–40 分</td></tr>
+<tr><td>年跑量</td><td>2024 年 141 km、2025 年 1,198 km、2026 年到 10/22 為 1,137 km</td></tr>
+<tr><td>VO2max（手錶）</td><td>跑步 49、騎乘 51（2026-10-22）</td></tr>
+<tr><td>心率設定</td><td>最大 190（HARCO 實測最高 187）、乳酸閾值 170；Z2 114–132、Z3 133–151、Z4 152–170</td></tr>
+</tbody>
+</table>
+
+<h3>同心率配速一年沒動</h3>
+
+<p>取心率 140–152、距離 5 km 以上的跑步按季平均：</p>
+
+<table>
+<thead><tr><th>季</th><th>次數</th><th>平均配速</th><th>平均心率</th><th>步頻</th></tr></thead>
+<tbody>
+<tr><td>2025 Q4</td><td>38</td><td>6:43</td><td>147</td><td>169</td></tr>
+<tr><td>2026 Q1</td><td>15</td><td>6:38</td><td>146</td><td>168</td></tr>
+<tr><td>2026 Q2</td><td>32</td><td>6:41</td><td>147</td><td>167</td></tr>
+<tr><td>2026 Q3</td><td>29</td><td>6:45</td><td>147</td><td>164</td></tr>
+<tr><td>2026 Q4（到 10/22）</td><td>8</td><td>6:41</td><td>146</td><td>169</td></tr>
+</tbody>
+</table>
+
+<p>跑量穩定、配速持平，表示刺激沒有轉成適應。下一章的三個瓶頸就是在解釋為什麼。</p>
+
+<h3>強度分布</h3>
+
+<p>近三個月（2026-07-22 起）跑步時間：Z1 3%、Z2 6%、Z3 44%、Z4 46%、Z5 0%。
+近六個月 87 次跑步裡，平均心率 140 以下的只有 13 次，155 以上的 8 次。
+絕大多數的跑都落在「不夠輕鬆、也不夠強」的中間。</p>
+
+<h3>速度參考</h3>
+
+<p>訓練中的最佳分段（都不是全力計時）：1 km 5:14（2026-01-21）、5 km 27:17（2026-02-21，5:27/km）、10 km 57:32（2025-12-20，5:45/km）。
+以 10 km 推估半馬約 2:07。備賽讀本第 7 章 W3 的 5 km 全力計時跑之後再校正。</p>
+
+<h3>恢復</h3>
+
+<ul>
+<li>HRV 夜間週平均：9 月初 51，10 月 42–46；手錶的平衡區 46–55。9/1 起 52 天中 11 天「偏低」，集中在 10 月。</li>
+<li>安靜心率 46–54，平均約 49，穩定。</li>
+<li>睡眠：10 月多數夜晚不足 6 小時，就寢多在午夜之後、六點前後起床。數字留在本機，不放這裡。</li>
+</ul>
+</section>
+<section class="tabpanel" id="limits" role="tabpanel" aria-labelledby="tab-limits">
+<h2 id="limits">2. 三個瓶頸</h2>
+
+<h3>睡眠</h3>
+
+<p>這是整份資料裡最刺眼的一項，比任何課表都重要。10 月多數夜晚不足 6 小時，HRV 從 9 月初一路往下掉，一年跑量穩定卻沒換到配速進步，這三件事串在一起很合理：目前的訓練刺激大概有一半沒被吸收。</p>
+
+<p>目標是多數夜晚 6.5 小時以上。就寢提早到 23:30 前，一晚就多 1.5–2 小時，這一項的效益超過後面所有課表調整。</p>
+
+<div class="warn">
+手錶的睡眠偵測以配戴為前提。若夜間常摘下，數字會低估；但 10 月的就寢時間集中在午夜之後是一致的，先當真的處理。
+</div>
+
+<h3>強度太灰</h3>
+
+<p>輕鬆跑平均心率 145–150，是最大心率的 76–79%：對輕鬆跑偏高，對質量課又不夠。
+結果是每次都有點累，但沒有一次累到能逼出適應。近三個月 Z1–2 只占 9%，理想是七成。</p>
+
+<p>做法只有一條：輕鬆跑把心率壓在 140 以下，配速大概會掉到 7:15–7:40。頭兩三週會覺得慢得難受，之後同心率的配速會自己回來。省下來的力氣，一週集中打一次有品質的課。</p>
+
+<h3>跑量夠半馬、不夠全馬</h3>
+
+<p>每週 25–30 km、長跑 18 km，半馬的底子已經有，HYROX 的 8 km 更不是問題。
+全馬需要穩定 50 km 以上、長跑 30 km 以上，至少 16–20 週的累積；三月前排不進去，也不該和 HYROX 的專項訓練搶時間。</p>
+
+<div class="key">
+順序：先睡飽，再把輕鬆跑變輕鬆，最後才談加量。三件事倒過來做，就是過去一年的樣子。
+</div>
+</section>
+<section class="tabpanel" id="zones" role="tabpanel" aria-labelledby="tab-zones">
+<h2 id="zones">3. 強度分級</h2>
+
+<p>以下心率以手錶設定（最大 190、閾值 170）為準，配速是對應目前體能的起點；W3 的 5 km 計時跑之後、以及每月月檢的同心率配速變化，都會讓配速那一欄往前移。</p>
+
+<table>
+<thead><tr><th>課型</th><th>心率</th><th>配速（起點）</th><th>用途</th><th>怎麼判斷做對了</th></tr></thead>
+<tbody>
+<tr><td>輕鬆跑</td><td>140 以下</td><td>7:15–7:40</td><td>所有「沒有特別目的」的跑；占跑步時間七成</td><td>全程能講完整句子；跑完覺得還能再跑</td></tr>
+<tr><td>長跑</td><td>150 以下，前半 140 以下</td><td>6:45–7:15</td><td>週日，60 → 90 分鐘</td><td>後半心率不往上飄；隔天不痠</td></tr>
+<tr><td>閾值跑</td><td>160–168</td><td>5:30–5:45</td><td>週二質量課，3 × 8–10 分，組間慢跑 3 分</td><td>最後一組還守得住配速；心率不衝破 170</td></tr>
+<tr><td>HYROX 模擬跑段</td><td>160–170（Run 8 不設限）</td><td>5:00–5:30</td><td>專項期的模擬課，1 km 跑接一站</td><td>Run 7 ÷ Run 2 在 1.10 以內</td></tr>
+<tr><td>計時跑</td><td>不設限</td><td>全力</td><td>W3 的 5 km；之後每 8–10 週一次</td><td>用來校正上面所有配速</td></tr>
+</tbody>
+</table>
+
+<p class="muted">天熱心率往上飄時，一律放慢守心率，不追配速。室內跑步機的心率配速對照和戶外不同，分開看。</p>
+
+<h3>每段跑的內部結構</h3>
+
+<p>不管哪一種課，每段跑的前 1–2 分鐘心率都還在爬，不要被當下的低數字騙去加速；看的是中後段。
+輕鬆跑若中途心率超過 140，直接走 30 秒再跑，不用覺得可惜。</p>
+</section>
+<section class="tabpanel" id="tohyrox" role="tabpanel" aria-labelledby="tab-tohyrox">
+<h2 id="tohyrox">4. 到 HYROX（3/13）的跑步安排</h2>
+
+<p>這一章只排跑步，週骨架照備賽讀本第 7 章：週二跑步質量課、週三 Wall Ball、週四肌力、週六教練課、週日長跑。
+目前實際每週跑 3–4 次，次數不用變，變的是強度分布。</p>
+
+<h3>11 月到 12 月中：基礎期（W3–W8）</h3>
+
+<ul>
+<li>跑 4 次：週二質量課（基礎期先用 6 × 2 分鐘稍快、慢跑 2 分恢復，心率上限 165）、週四或週五一次輕鬆跑、週六教練課後若有餘力加 20 分鐘輕鬆跑、週日長跑 60 → 75 分鐘。</li>
+<li>除了週二，全部守心率 140 以下。</li>
+<li>週跑量從 25 km 緩慢加到 35 km，每週加不超過 10%，W6 減量三成。</li>
+<li>騎車維持每週一次當 Z2 填充，不累腿、不計入跑量。</li>
+<li>W3（11/2–11/8）5 km 全力計時跑：拿到後校正第 3 章的配速欄。</li>
+</ul>
+
+<h3>12 月中到 2 月中：專項期（W9–W15）</h3>
+
+<ul>
+<li>週二改閾值跑：3 × 8–10 分，心率 160–168，配速 5:30–5:45。</li>
+<li>週六教練課的 Hybrid 與模擬課就是「疲勞下跑 1 km」的練習，跑段守 5:00–5:30，站後第一個 100 m 只顧步頻。</li>
+<li>週日長跑拉到 90 分鐘，心率 150 以下。</li>
+<li>W15 量峰比 W3 多兩到三成（大約 40 km），之後不再加。</li>
+<li>春節（W16–W17）量減一半，保留一次閾值跑和一次長跑。</li>
+</ul>
+
+<h3>2 月中到比賽：減量（W18–W21）</h3>
+
+<ul>
+<li>W18 全程模擬之後，量每週減 30–40%，強度保留：週二閾值跑縮成 2 × 8 分，長跑縮到 60 分。</li>
+<li>比賽週只跑兩次輕鬆跑，各 30 分，最後一次在賽前兩天。</li>
+<li>比賽前一週睡眠要到位，比最後一次練習重要。</li>
+</ul>
+
+<div class="key">
+HYROX 的跑段配速策略在備賽讀本第 6 章；這裡的訓練是為了讓那張表的心率在比賽當天守得住。
+</div>
+</section>
+<section class="tabpanel" id="after" role="tabpanel" aria-labelledby="tab-after">
+<h2 id="after">5. HYROX 之後：半馬與全馬</h2>
+
+<h3>半馬</h3>
+
+<p>HYROX 結束後接 12 週可以到 6 月，但台灣六月的濕熱對第一次半馬不友善。
+較合理的目標是 2027 年 11 月到 12 月的賽事，中間的夏天用來把輕鬆跑養成習慣、把週跑量穩在 35–40 km。</p>
+
+<p>以目前 10 km 57 分推估，現在跑半馬約 2:07；睡眠和強度分布修正半年後，sub-2:00 是合理目標（需要 10 km 跑進 54 分左右）。</p>
+
+<p>12 週半馬課表的骨架：</p>
+
+<ul>
+<li>週跑量 40 → 50 km，三週加一週減。</li>
+<li>每週一次長跑，從 16 km 逐步到 20 km，最後 8 週至少三次 18 km 以上；長跑後半段練目標配速。</li>
+<li>每週一次閾值或節奏跑（4 × 10 分，或連續 20–30 分在目標配速），其餘全部輕鬆跑。</li>
+<li>賽前 10 天開始減量；補給在長跑中先練過。</li>
+</ul>
+
+<h3>全馬</h3>
+
+<p>排在半馬完賽之後，2028 年上半年。先跑一場半馬，才知道長距離的補給、腸胃和配速感怎麼運作，也才有可靠的目標配速。
+從半馬的底子再花 16–20 週把週跑量推到 50–60 km、長跑到 30–32 km，每週一次質量課不變。</p>
+
+<div class="warn">
+全馬訓練的受傷風險主要來自加量太快。每週加量不超過 10%、每三到四週減一週，這兩條比任何課表細節都重要。
+</div>
+
+<p class="muted">真的開始半馬備賽時再決定要不要另開一份讀本；這一頁先記方向。</p>
+</section>
+<section class="tabpanel" id="monthly" role="tabpanel" aria-labelledby="tab-monthly">
+<h2 id="monthly">6. 每月月檢</h2>
+
+<p>每月月初在 Mac mini 跑 <code>python3 scripts/garmin_pull.py</code>（本機要有 Garmin Personal API key），把下面五個數字填進紀錄表；VO2max 從手錶抄。
+腳本加 <code>--public</code> 時睡眠只給「幾晚不足 6 小時」。</p>
+
+<table>
+<thead><tr><th>指標</th><th>2026-10 基準</th><th>目標</th><th>為什麼看它</th></tr></thead>
+<tbody>
+<tr><td>心率 140–152 的平均配速</td><td>6:41/km</td><td>半年內 6:15/km</td><td>有氧效率最直接的指標，不受天氣以外的因素干擾</td></tr>
+<tr><td>跑步時間 Z1–2 比例（近 90 天）</td><td>9%</td><td>70%</td><td>強度分布有沒有真的改</td></tr>
+<tr><td>HRV 週平均</td><td>42–46</td><td>48 以上並穩定</td><td>恢復有沒有跟上</td></tr>
+<tr><td>睡眠</td><td>多數夜晚不足 6 小時</td><td>多數夜晚 6.5 小時以上</td><td>最大的限制因子</td></tr>
+<tr><td>週跑量與最長跑</td><td>13–35 km（中位數約 24）、最長 18.6 km</td><td>W15 約 40 km、長跑 90 分鐘</td><td>量有沒有照計畫走、有沒有加太快</td></tr>
+</tbody>
+</table>
+
+<h3>紀錄</h3>
+
+<table>
+<thead><tr><th>月</th><th>同心率配速</th><th>Z1–2 比例</th><th>HRV 週均</th><th>不足 6 小時的夜晚</th><th>週跑量／最長</th><th>VO2max 跑／騎</th><th>備註</th></tr></thead>
+<tbody>
+<tr><td>2026-10</td><td>6:41</td><td>9%</td><td>42–46</td><td>多數</td><td>13–35 km／18.6 km</td><td>49／51</td><td>基準。HARCO 10/18 完賽</td></tr>
+</tbody>
+</table>
+
+<p class="muted">每月加一列。同心率配速以當季平均為準，單月次數少時波動大，看趨勢不看單點。</p>
+</section>
+<section class="tabpanel" id="sources" role="tabpanel" aria-labelledby="tab-sources">
+<h2 id="sources">7. 來源與限制</h2>
+
+<ul>
+<li><a href="https://developer.garmin.com/gc-developer-program/personal/personal-api" target="_blank">Garmin Connect Personal API</a>——2026-10-21 開放的個人資料 API。擷取腳本 <code>scripts/garmin_pull.py</code>，基準筆記 <code>research/garmin-baseline-2026-10.md</code>。</li>
+<li>手錶：Garmin Forerunner 965。心率為手腕光學；VO2max、訓練狀態 API 不提供，從手錶讀取。</li>
+<li>HYROX 的跑段配速與心率上限：<a href="../#run">備賽讀本第 6 章</a>；週骨架與 21 週計畫：<a href="../#plan">第 7 章</a>。</li>
+</ul>
+
+<h3>限制</h3>
+
+<ul>
+<li>配速與時間推估（半馬 2:07、閾值 5:30–5:45 等）是以訓練分段用一般公式換算的起點，不是預測；以 W3 計時跑和每月月檢修正。</li>
+<li>輕鬆跑心率上限 140 是以最大心率 190 的 74% 取整，若計時跑測到的最高心率明顯不同，上限一起調。</li>
+<li>睡眠數字只留本機；這一頁與 repo 只寫定性描述。</li>
+<li>這一頁 2026-10-22 由主 session 單獨完成，沒有跨模型審稿。</li>
+</ul>
+</section>
+</main>
+</div>
+<hr style="margin:3em 0 1em;border:none;border-top:1px solid var(--line)">
+<p class="muted">個人訓練用途整理。數據取自 Garmin Connect Personal API 與手錶讀數；心率區間、配速與時間推估都是起點，以每月月檢與實際測驗修正。HYROX 備賽讀本見上一層頁面。</p>
+</div>
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var panels=[].slice.call(document.querySelectorAll('.tabpanel'));
+  function show(id,push){
+    var found=false;
+    tabs.forEach(function(t){t.classList.toggle('active',t.dataset.target===id);});
+    panels.forEach(function(p){var on=p.id===id;p.classList.toggle('active',on);if(on)found=true;});
+    if(found){ if(push)history.replaceState(null,'','#'+id); window.scrollTo(0,0); }
+    return found;
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.target,true);});});
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a)return;
+    var id=a.getAttribute('href').slice(1); var el=document.getElementById(id); if(!el)return;
+    var panel=el.closest('.tabpanel');
+    if(panel){e.preventDefault();show(panel.id,true); if(el!==panel){el.scrollIntoView({block:'start'});}}
+  });
+  if(location.hash){show(location.hash.slice(1),false);}
+})();
+</script>
+</body>
+</html>
