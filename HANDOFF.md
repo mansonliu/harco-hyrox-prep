@@ -42,7 +42,7 @@
    每次結果照 research/harco-2026-results.md 的格式整理，修推估與第 6 章心率參考。
 5. **2027-02 中旬**：HYROX Taipei 賽前一個月來信（跑圈數、場地圖、報到）→ 更新第 6、8 章與第 9 章待確認清單。
 6. **3/10 前後**：出發名單公布 → 第 8 章時間表填實際時刻。
-7. **每月月初 Garmin 月檢**：`python3 scripts/garmin_pull.py`（本機要有 gc-personal 與 key；`--public` 版睡眠只給定性描述），
+7. **每月月初 Garmin 月檢**（任務看板排程卡 `recurring-garmin-monthly`，手動觸發）：`python3 scripts/garmin_pull.py`（本機要有 gc-personal 與 key；`--public` 版睡眠只給定性描述），
    把五個指標填進 `running/_notes/06-monthly.html` 的紀錄表（每月一列），VO2max 從手錶抄，再 `./build.sh`。W3 計時跑、W9／W13／W18 測驗的心率也一起看。
 8. 手錶能不能戴：規則書允許清單沒列，看技術說明影片或問客服。
 
