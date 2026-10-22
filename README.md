@@ -17,7 +17,7 @@
 | 4. 雪橇兩站 | 推 152 kg、拉 103 kg，各 4 × 12.5 m；精簡版技術、卡住重啟、繩索管理、替代訓練 |
 | 5. 其他五站 | SkiErg、Burpee、Row、Farmers、Sandbag Lunges：規則、HARCO 實測、HYROX 推估 |
 | 6. 跑步與轉換區 | 8 × 1 km 心率配速、跑圈自己數、RoxZone 流程 |
-| 7. 訓練計畫 | 21 週（2026-10-19 → 2027-03-13），以每週六中午 1 小時教練課為核心＋自主訓練；W9／W13／W18 三次測驗；連假安排 |
+| 7. 訓練計畫 | 21 週（2026-10-19 → 2027-03-13），以每週六中午 1 小時教練課為核心＋自主訓練；W9／W13／W18 三次測驗；連假安排；Garmin 月檢（訓練基準與五個追蹤指標） |
 | 8. 比賽週與比賽日 | 報到、裝備（§10 允許清單）、補給、以出發時間往回推的時間表、配速卡 |
 | 9. 來源與待確認 | 規則書與賽事頁、HARCO 成績來源、技術資料、HYROX Taipei 待公布事項 |
 
@@ -30,7 +30,7 @@
 - HARCO 當天推雪橇臨時下修為 126 kg（新草皮摩擦大），HYROX 的 152 kg 還沒在比賽中推過。
 - HYROX Taipei 的跑圈數、場地圖、報到時間仍是 TBC；個人出發時間賽前約 3 天公布。
 - 鞋確定沿用 HARCO 穿的 adidas Dropset Pro；硬地板與新地毯抓地較差，比賽當天熱身先試地面。
-- 公開 repo：不寫姓名、選手編號；HARCO 原始成績 PDF 與 TCX 不進 repo。
+- 公開 repo：不寫姓名、選手編號；HARCO 原始成績 PDF 與 TCX 不進 repo；Garmin 的睡眠時數不寫進 repo。
 
 ## 目錄結構
 
@@ -44,8 +44,9 @@ research/           研究筆記（含出處），讀本的憑據
   harco-official-spec.md      HARCO 官網逐字規格（2026-08-20）
   codex-hyrox-stations.md     HYROX 八站技術（Codex 產出）
   codex-sled-deep-dive.md     雪橇兩站專題（Codex 產出）
+  garmin-baseline-2026-10.md  Garmin 一年訓練量、同心率配速、心率區間、HRV（第 7 章月檢的憑據）
   archive/                    已結束的 HARCO 備賽資料（配速模型、八週計畫、選鞋）
-scripts/            HARCO 圈數對齊與心率圖產生腳本（輸入 TCX，不在 repo）
+scripts/            HARCO 圈數對齊與心率圖產生腳本（輸入 TCX，不在 repo）；garmin_pull.py 每月從 Garmin Personal API 拉月檢（key 不在 repo）
 build.sh            重新產生 index.html
 ```
 
